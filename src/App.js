@@ -1,20 +1,20 @@
-import './App.css';
-import React from 'react';
+import React, { useReducer, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ListItems from './components/ListItems';
 import AddItem from './components/AddItem';
 import AddItemButton from './components/AddItemButton';
+import './App.css';
 
 const initialList = [
   {
     id: 'a',
     name: 'Foo',
-    color: '#000000',
+    color: '#ffffff',
   },
   {
     id: 'b',
     name: 'Bar',
-    color: '#000000',
+    color: '#ffffff',
   },
 ];
 
@@ -38,7 +38,7 @@ const listReducer = (state, action) => {
           };
 
           return updatedItem;
-        } 
+        }
 
         return item;
       });
@@ -51,25 +51,25 @@ const listReducer = (state, action) => {
 };
 
 const App = () => {
-  const [listData, dispatchListData] = React.useReducer(listReducer, {
+  const [listData, dispatchListData] = useReducer(listReducer, {
     list: initialList,
     isShowList: true,
   });
-  const [name, setName] = React.useState('Label');
-  const [addItem, setAddItem] = React.useState('show-button');
+  const [name, setName] = useState('Label');
+  const [addItem, setAddItem] = useState('show-button');
 
-  const handleTextChange = (event) => {
-    setName(event.target.value);
-  }
-
-  const handleAdd = (textColor) => {
-    dispatchListData({ type: 'ADD_ITEM', name: name, id: uuidv4(), color: textColor });
+  const handleAdd = (labelName, textColor) => {
+    dispatchListData({ type: 'ADD_ITEM', name: labelName, id: uuidv4(), color: textColor });
     setName('Label');
     setAddItem('show-button')
   }
 
   function handleAddButtonClick() {
     setAddItem('hide-button')
+  }
+
+  function handleClose() {
+    setAddItem('show-button')
   }
 
   const handleEdit = (labelId, labelName, textColor) => {
@@ -81,17 +81,21 @@ const App = () => {
   }
 
   return (
-    <div>
-      <ListItems list={listData.list} onEdit={handleEdit} />
-      {addItem === 'show-button' && <AddItemButton addButtonClick={handleAddButtonClick} />}
-
-      {addItem === 'hide-button' && 
-      <AddItem
-        name={name}
-        textColor='#000000'
-        onTextChange={handleTextChange}
-        onAdd={handleAdd}
-      />}
+    <div className="content">
+      <div>
+        <ListItems list={listData.list} onEdit={handleEdit} />
+        {addItem === 'show-button' &&
+          <AddItemButton addButtonClick={handleAddButtonClick} />}
+      </div>
+      <div>
+        {addItem === 'hide-button' &&
+          <AddItem
+            name={name}
+            textColor='#ffffff'
+            onAdd={handleAdd}
+            onClose={handleClose}
+          />}
+      </div>
     </div>
   );
 }
