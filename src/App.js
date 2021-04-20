@@ -1,20 +1,21 @@
 import React, { useReducer, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import ListItems from './components/ListItems';
-import AddItem from './components/AddItem';
+import Item from './components/Item';
 import AddItemButton from './components/AddItemButton';
 import './App.css';
+
 
 const initialList = [
   {
     id: 'a',
     name: 'Foo',
-    color: '#ffffff',
+    color: '#d0021b',
   },
   {
     id: 'b',
     name: 'Bar',
-    color: '#ffffff',
+    color: '#4a90e2',
   },
 ];
 
@@ -81,21 +82,18 @@ const App = () => {
   }
 
   return (
-    <div className="content">
-      <div>
+    <div className="content">      
         <ListItems list={listData.list} onEdit={handleEdit} />
         {addItem === 'show-button' &&
-          <AddItemButton addButtonClick={handleAddButtonClick} />}
-      </div>
-      <div>
+        <AddItemButton addButtonClick={handleAddButtonClick} />}
+      
         {addItem === 'hide-button' &&
-          <AddItem
+          <Item
             name={name}
-            textColor='#ffffff'
-            onAdd={handleAdd}
+            textColor='#000'
+            onAddEdit={handleAdd}
             onClose={handleClose}
-          />}
-      </div>
+          />}     
     </div>
   );
 }

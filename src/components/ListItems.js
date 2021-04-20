@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import EditItem from './EditItem';
+import Item from './Item';
 
 const ListItems = ({ list, onEdit }) => {
   const [labelIdToEdit, setLabelIdToEdit] = useState('');
@@ -21,19 +21,22 @@ const ListItems = ({ list, onEdit }) => {
     <div>
       {list.map((item) => {
         return item.id !== labelIdToEdit ?
-          <div key={item.id}>
-            <div style={{ 'backgroundColor': item.color }}>{item.name}</div>
-            <div>
-              <button type="button" id={item.id} onClick={handleEditButtonClick}>Edit</button>
+          <div className="editBoxContainer" key={item.id}>
+            <div style={{width:'2rem'}}></div>
+            <div className="labelContainer" style={{ 'backgroundColor': item.color }}><div className="labelContent" style={{ 'backgroundColor': item.color }}>{item.name}</div></div>
+            <div className="btnSection">
+              <button className="button" type="button" id={item.id} onClick={handleEditButtonClick}>Edit</button>
             </div>
           </div>
           :
-          <EditItem
+          <div>
+          <Item
             name={item.name}
             textColor={item.color}
-            onEdit={handleEdit}
+            onAddEdit={handleEdit}
             onClose={handleClose}
-          />
+          />         
+          </div>
       }
       )}
     </div>
