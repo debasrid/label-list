@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Label } from 'semantic-ui-react';
 import { SketchPicker } from 'react-color'
 import './Item.css';
 

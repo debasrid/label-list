@@ -93,7 +93,7 @@
 
 .editItemContainer{
 width:100%;
-height:8rem;;
+height:9rem;;
 display: flex;
 flex-direction: column; 
 border-style: none;
@@ -111,7 +111,7 @@ z-index: 4;
 
 .editColorChangeBox{
   width:100%;
-  height:8rem;;
+  height:8rem;
   display: flex;
   flex-direction: column; 
   border-style: none;
@@ -125,6 +125,7 @@ z-index: 4;
     justify-items: center;
     align-content: center;
     border-style: none;
+    margin:0 0 0.5em 0em;
   }
   .buttonedit{
     height:30%;

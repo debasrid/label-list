@@ -54,7 +54,6 @@ const listReducer = (state, action) => {
 const App = () => {
   const [listData, dispatchListData] = useReducer(listReducer, {
     list: initialList,
-    isShowList: true,
   });
   const [name, setName] = useState('Label');
   const [addItem, setAddItem] = useState('show-button');
@@ -75,10 +74,6 @@ const App = () => {
 
   const handleEdit = (labelId, labelName, textColor) => {
     dispatchListData({ type: 'UPDATE_ITEM', name: labelName, id: labelId, color: textColor });
-  }
-
-  if (!listData.isShowList) {
-    return null;
   }
 
   return (
